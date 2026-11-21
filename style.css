@@ -1,0 +1,195 @@
+/* ============ 水晶算珠 — 玻璃拟态风 ============ */
+:root{
+  --ink:#453a66;
+  --soft:#8d7fb0;
+  --glass:rgba(255,255,255,.55);
+  --glass-bd:rgba(255,255,255,.75);
+  --violet:#7c5cbf;
+  --focus:rgba(124,92,191,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#e9e3f6 0%,#f2e9f3 45%,#e3ecf6 100%);
+  color:var(--ink);
+  font-family:"Century Gothic","Microsoft YaHei","PingFang SC",sans-serif;
+  padding:48px clamp(16px,4vw,40px) 64px;
+  overflow-x:hidden;
+}
+
+/* ---------- 漂浮光珠 ---------- */
+.aura{position:fixed;inset:0;pointer-events:none;z-index:0}
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(2px);
+  opacity:.55;
+  animation:float 9s ease-in-out infinite;
+}
+.o1{width:130px;height:130px;left:8%;top:14%;background:radial-gradient(circle at 32% 30%,#fff,#d9c8f0)}
+.o2{width:70px;height:70px;right:12%;top:20%;background:radial-gradient(circle at 32% 30%,#fff,#c9d9f2);animation-delay:-3s}
+.o3{width:200px;height:200px;left:60%;bottom:6%;background:radial-gradient(circle at 32% 30%,#fff,#e8d4f2);animation-delay:-5s}
+.o4{width:46px;height:46px;left:22%;bottom:22%;background:radial-gradient(circle at 32% 30%,#fff,#f2dce3);animation-delay:-1.5s}
+.o5{width:90px;height:90px;right:24%;bottom:30%;background:radial-gradient(circle at 32% 30%,#fff,#d4e9f2);animation-delay:-6s}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-26px)}
+}
+
+/* ---------- 头部 ---------- */
+.crystal-head{
+  text-align:center;
+  margin-bottom:34px;
+  position:relative;z-index:1;
+}
+.gem{
+  font-size:38px;
+  color:var(--violet);
+  text-shadow:0 0 24px rgba(124,92,191,.5);
+  animation:float 6s ease-in-out infinite;
+}
+.kicker{
+  font-size:11px;letter-spacing:.6em;
+  color:var(--soft);
+  margin:14px 0 10px;
+  text-transform:uppercase;
+}
+.crystal-head h1{
+  font-size:clamp(34px,5vw,50px);
+  font-weight:600;
+  letter-spacing:.1em;
+  text-shadow:0 2px 18px rgba(124,92,191,.25);
+}
+.lead{
+  margin-top:12px;
+  font-size:14px;
+  color:var(--soft);
+  letter-spacing:.08em;
+}
+
+/* ---------- 玻璃 tab ---------- */
+.tab-bar{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+  margin-bottom:26px;
+  position:relative;z-index:1;
+}
+.tab{
+  background:rgba(255,255,255,.35);
+  border:1px solid var(--glass-bd);
+  border-radius:100px;
+  backdrop-filter:blur(10px);
+  color:var(--soft);
+  font-family:inherit;
+  font-size:13px;
+  letter-spacing:.12em;
+  padding:10px 22px;
+  cursor:pointer;
+  transition:all .25s;
+}
+.tab:hover{background:rgba(255,255,255,.6);color:var(--ink)}
+.tab.active{
+  background:rgba(255,255,255,.8);
+  color:var(--violet);
+  box-shadow:0 6px 22px rgba(124,92,191,.28);
+}
+
+/* ---------- 中央玻璃大卡 ---------- */
+.crystal-card{
+  position:relative;z-index:1;
+  width:min(620px,100%);
+  margin:0 auto;
+  background:var(--glass);
+  border:1px solid var(--glass-bd);
+  border-radius:26px;
+  backdrop-filter:blur(18px);
+  box-shadow:0 18px 46px rgba(124,92,191,.2),inset 0 1px 0 rgba(255,255,255,.9);
+  padding:36px 34px 32px;
+  animation:rise .4s ease-out;
+}
+@keyframes rise{from{transform:translateY(20px);opacity:0}}
+.cc-title{
+  font-size:24px;font-weight:600;
+  letter-spacing:.08em;
+  margin-bottom:6px;
+}
+.cc-sub{
+  font-size:12px;color:var(--soft);
+  letter-spacing:.14em;
+  margin-bottom:26px;
+}
+
+/* ---------- 表单 ---------- */
+.cc-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cc-field{display:flex;flex-direction:column;gap:7px}
+.cc-field.full{grid-column:1/-1}
+.cc-field label{
+  font-size:11px;letter-spacing:.22em;
+  color:var(--soft);
+  text-transform:uppercase;
+}
+.cc-input{
+  background:rgba(255,255,255,.65);
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:12px;
+  padding:11px 14px;
+  font-size:15px;
+  color:var(--ink);
+  font-family:inherit;
+  outline:none;
+  transition:box-shadow .2s,border-color .2s;
+}
+.cc-input:focus{
+  border-color:var(--violet);
+  box-shadow:0 0 0 4px var(--focus);
+}
+.cc-actions{
+  grid-column:1/-1;
+  display:flex;justify-content:flex-end;
+  margin-top:6px;
+}
+.cc-btn{
+  background:linear-gradient(135deg,#8a6bd0,#6b4fae);
+  border:none;
+  border-radius:100px;
+  color:#fff;
+  font-family:inherit;
+  font-size:13px;
+  letter-spacing:.28em;
+  padding:12px 34px;
+  cursor:pointer;
+  box-shadow:0 8px 22px rgba(107,79,174,.4);
+  transition:transform .2s,box-shadow .2s;
+}
+.cc-btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(107,79,174,.5)}
+.cc-btn:active{transform:translateY(0)}
+
+/* ---------- 结果 ---------- */
+.cc-result{
+  grid-column:1/-1;
+  margin-top:20px;
+  background:rgba(255,255,255,.5);
+  border:1px solid var(--glass-bd);
+  border-radius:18px;
+  padding:22px 24px;
+}
+.cc-big{
+  font-size:clamp(30px,4vw,42px);
+  font-weight:600;
+  color:var(--violet);
+  letter-spacing:.04em;
+  line-height:1.2;
+}
+.cc-big small{font-size:.4em;color:var(--soft);letter-spacing:.2em}
+.cc-lines{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.cc-lines div{
+  display:flex;justify-content:space-between;
+  font-size:13px;color:#6d5f92;
+  border-bottom:1px dashed rgba(124,92,191,.2);
+  padding-bottom:6px;
+}
+.cc-lines div span:last-child{font-weight:600;color:var(--ink)}
+
+@media (max-width:560px){
+  .cc-grid{grid-template-columns:1fr}
+  .crystal-card{padding:26px 20px}
+}
